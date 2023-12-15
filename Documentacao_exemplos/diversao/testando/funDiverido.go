@@ -22,17 +22,24 @@ type VantagensTimes struct {
 	Vantagens float64
 }
 
-func jogosSimulados(home, away Time, teamStats map[Time]int) {
+type grupos struct {
+	Nome   string
+	G1, G2 []string
+}
+
+func gruposDefinidos()
+
+func jogosSimulados(casa, fora Time, teamStats map[Time]int) {
 	golsCasa := rand.Intn(5) // Gols do time da casa (0 a 4 gols)
 	golsFora := rand.Intn(5) // Gols do time visitante (0 a 4 gols)
 
 	if golsCasa > golsFora {
-		teamStats[home] += 3
+		teamStats[casa] += 3
 	} else if golsCasa < golsFora {
-		teamStats[away] += 3
+		teamStats[fora] += 3
 	} else {
-		teamStats[home]++
-		teamStats[away]++
+		teamStats[casa]++
+		teamStats[fora]++
 	}
 }
 
