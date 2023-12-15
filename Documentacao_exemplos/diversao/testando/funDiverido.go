@@ -22,12 +22,12 @@ type VantagensTimes struct {
 	Vantagens float64
 }
 
-type grupos struct {
+type Grupos struct {
 	Nome   string
 	G1, G2 []string
 }
 
-func gruposDefinidos()
+func gruposDefinidos() {}
 
 func jogosSimulados(casa, fora Time, teamStats map[Time]int) {
 	golsCasa := rand.Intn(5) // Gols do time da casa (0 a 4 gols)
