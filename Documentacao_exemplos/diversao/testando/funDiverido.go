@@ -19,16 +19,16 @@ const (
 
 type VantagensTimes struct {
 	Time      Time
-	Advantage float64
+	Vantagens float64
 }
 
-func simulateGame(home, away Time, teamStats map[Time]int) {
-	homeGoals := rand.Intn(5) // Gols do time da casa (0 a 4 gols)
-	awayGoals := rand.Intn(5) // Gols do time visitante (0 a 4 gols)
+func jogosSimulados(home, away Time, teamStats map[Time]int) {
+	golsCasa := rand.Intn(5) // Gols do time da casa (0 a 4 gols)
+	golsFora := rand.Intn(5) // Gols do time visitante (0 a 4 gols)
 
-	if homeGoals > awayGoals {
+	if golsCasa > golsFora {
 		teamStats[home] += 3
-	} else if homeGoals < awayGoals {
+	} else if golsCasa < golsFora {
 		teamStats[away] += 3
 	} else {
 		teamStats[home]++
@@ -36,15 +36,15 @@ func simulateGame(home, away Time, teamStats map[Time]int) {
 	}
 }
 
-func simulateChampionship(advantages []VantagensTimes) map[Time]int {
+func campeonatoSimulado(vantagenss []VantagensTimes) map[Time]int {
 	teamStats := make(map[Time]int)
-	for _, team := range advantages {
+	for _, team := range vantagenss {
 		teamStats[team.Time] = 0
 	}
 
-	for i := 0; i < len(advantages)-1; i++ {
-		for j := i + 1; j < len(advantages); j++ {
-			simulateGame(advantages[i].Time, advantages[j].Time, teamStats)
+	for i := 0; i < len(vantagenss)-1; i++ {
+		for j := i + 1; j < len(vantagenss); j++ {
+			jogosSimulados(vantagenss[i].Time, vantagenss[j].Time, teamStats)
 		}
 	}
 
@@ -55,15 +55,15 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	vantagens := []VantagensTimes{
-		{Time: Flamengo, Advantage: 1.2},
-		{Time: Fluminense, Advantage: 1.0},
-		{Time: Palmeiras, Advantage: 1.1},
-		{Time: River, Advantage: 0.9},
-		{Time: Internacional, Advantage: 0.8},
-		{Time: Atletico, Advantage: 1.0},
+		{Time: Flamengo, Vantagens: 1.2},
+		{Time: Fluminense, Vantagens: 1.0},
+		{Time: Palmeiras, Vantagens: 1.1},
+		{Time: River, Vantagens: 0.9},
+		{Time: Internacional, Vantagens: 0.8},
+		{Time: Atletico, Vantagens: 1.0},
 	}
 
-	teamStats := simulateChampionship(vantagens)
+	teamStats := campeonatoSimulado(vantagens)
 
 	fmt.Println("Pontuação final do campeonato:")
 	for team, points := range teamStats {
